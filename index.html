@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bored (Random)</title>
+</head>
+<body>
+  <button id="btn">Random Activity</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    document.getElementById('btn').addEventListener('click', async () => {
+      out.textContent = 'Loading…';
+      try {
+        const res = await fetch('https://apis.scrimba.com/bored/api/activity');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        out.textContent = 'Error: ' + e.message;
+      }
+    });
+  </script>
+</body>
+</html>
+
